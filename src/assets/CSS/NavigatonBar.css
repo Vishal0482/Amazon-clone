@@ -1,0 +1,22 @@
+.navigation-bar{
+    background-color: #232f3e;
+    color: white;
+}
+
+.navigation-container{
+    display: flex;
+}
+
+.navigation-item{
+    margin: 7px 1px;
+    padding: 0 5px;
+}
+
+.navigation-item:hover{
+    border: 1px solid white;
+    margin: 6px 0;
+}
+
+.navigaion-menu{
+    display: flex;
+}

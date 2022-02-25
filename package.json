@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "firebase": "^9.6.7",
     "react": "^17.0.2",
+    "react-back-to-top-button": "0.0.14",
     "react-currency-format": "^1.1.0",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",

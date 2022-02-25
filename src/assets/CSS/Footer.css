@@ -1,0 +1,28 @@
+.back-to-top{
+    text-align: center;
+    padding: 10px;
+    background-color: #37475A;
+    margin-top: 5px;
+    color: white;
+}
+
+.footer-container{
+    background-color: #232F3E;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px 50px 10px;
+}
+
+.footer-nav-heading{
+    font-weight: 600;
+}
+
+.footer-item{
+    list-style: none;
+    padding: 1px;
+}
+.footer-item:hover{
+   text-decoration: underline;
+   cursor: pointer;
+}
