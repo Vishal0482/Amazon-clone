@@ -5,11 +5,11 @@ import Home from './components/Home';
 import { useStateValue } from './components/StateProvider';
 import Login from './auth/Login';
 import ResetPassword from './auth/ResetPassword';
+import Register from './auth/Register';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from './firebase/config';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './firebase/config';
 // import Payment from './components/Payment';
 import Footer from './components/Footer';
 
@@ -18,9 +18,7 @@ import Footer from './components/Footer';
 // const promise = loadStripe(" public-key ");
 
 function App() {
-  initializeApp(firebaseConfig);
   const [{ }, dispatch] = useStateValue();
-  const auth = getAuth();
   useEffect(() => {
    onAuthStateChanged( auth, (authUser) => {
       // console.log(authUser);
@@ -46,8 +44,9 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="checkout" element={<> <Header /> <Checkout /> </>} />
+          <Route path="checkout" element={<> <Header /> <Checkout /> <Footer /> </>} />
           {/* <Route path="/payment" element={<> <Header /> <Elements stripe={promise} > 
             <Payment />  
           </Elements> </>} /> */}

@@ -15,6 +15,7 @@
 .navigation-item:hover{
     border: 1px solid white;
     margin: 6px 0;
+    cursor: pointer;
 }
 
 .navigaion-menu{

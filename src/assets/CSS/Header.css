@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     background-color: #131921;
-    position: sticky;
+    position: relative;
     top: 0;
     z-index: 100;
 }
@@ -11,9 +11,18 @@
 .header-logo{
     width: 100px;
     object-fit: contain;
-    margin: 0 20px;
+    margin: 0 20px 0 10px;
     margin-top: 18px;  
 }  
+
+.header-logo-text{
+    color: white;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    left: 110px;
+    font-weight: 600;
+}
 
 .header-search{
     display: flex;
@@ -64,10 +73,20 @@
     justify-content: space-evenly;
 }
 
+.header-nav > a{
+    text-decoration: none;
+}
+
 .header-option{
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 0 10px;
+    padding: 5px;
     color: white;
+}
+
+.header-option:hover{
+    border: 1px solid white;
+    margin: -1px 9px;
+    cursor: pointer;
 }

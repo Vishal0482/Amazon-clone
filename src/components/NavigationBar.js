@@ -1,17 +1,13 @@
 import React from 'react'
 import "../assets/CSS/NavigatonBar.css"
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
+import SideBar from './SideBar';
 
 function NavigationBar() {
     return (
         <div className="navigation-bar">
             <div className="navigation-container">
-                <div className="navigation-item">
-                    <div className="navigaion-menu">
-                        <div className="navigation-menu-icon"><MenuIcon /></div>
-                        <div className="navigation-menu-text">All</div>
-                    </div>
-                </div>
+                <SideBar />
                 <div className="navigation-item">
                     Best Seller
                 </div>
@@ -40,7 +36,6 @@ function NavigationBar() {
                     New Relese
                 </div>
             </div>
-
         </div>
     )
 }

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import "../assets/CSS/Login.css";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, provider } from '../firebase/config';
+import GoogleIcon from '@mui/icons-material/Google';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth();
     const navigate = useNavigate();
     const signIn = (e) => {
         e.preventDefault();
@@ -25,22 +26,26 @@ function Login() {
             });
     }
 
-    const register = (e) => {
+    const googleHandler = async (e) => {
         e.preventDefault();
-
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                // console.log("Registered user: ", user);
-                setEmail("");
-                setPassword("");
+        provider.setCustomParameters({ prompt: 'select_account' });
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                console.log(user);
+                navigate('/');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                // console.log("Error ocured: ", errorCode, errorMessage);
+                const email = error.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log(errorMessage + email);
             });
-    }
+    };
+
     return (
         <div className="login">
             <Link to='/'>
@@ -54,18 +59,19 @@ function Login() {
                     <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
                     <h5>Password</h5>
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <button type="submit"
-                        onClick={signIn}
-                        className="login-signInButton" >Sign in</button>
+                    <button type="submit" onClick={signIn} className="login-signInButton" >Sign in</button>
+                    <button onClick={googleHandler} className="login-registerButton" >
+                        <GoogleIcon className="google-logo-icon" /> <p>Sign in with google</p>
+                    </button>
                 </form>
                 <Link to='/resetPassword'>
                     <p>Reset Password</p>
                 </Link>
                 <p>By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.</p>
-
-                <button
-                    onClick={register}
-                    className="login-registerButton" >Create your Amazon Account</button>
+            </div>
+            <div className="register-new-container">
+                <p className="register-new-label">New to Amazon?</p>
+                <button onClick={e => { navigate('/register') }} className="login-registerButton" >Create your Amazon Account </button>
             </div>
         </div>
     )

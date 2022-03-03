@@ -1,6 +1,7 @@
-// import firebase from 'firebase';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "clone-29de6.firebaseapp.com",
   projectId: "clone-29de6",
@@ -9,20 +10,9 @@ export const firebaseConfig = {
   appId: "1:999775148271:web:cc5d06efa0807b2f57e31a"
 };
 
-
-// const firebaseApp  = firebase.initializeApp(firebaseConfig);
-// const db = firebaseApp.firestore();
-// const auth = firebase.auth();
-
-
-// import { initializeApp } from 'firebase/app';
-// import { getAuth } from 'firebase/auth';
-// import { getFirestore } from "firebase/firestore";
-// const app = initializeApp(firebaseConfig);
-// ​​const auth = getAuth(app);
-// const db = getFirestore(app);
-
-// export { db, auth };
-
+export const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
 
 

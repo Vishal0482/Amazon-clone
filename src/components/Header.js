@@ -4,15 +4,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { auth } from '../firebase/config';
 import NavigationBar from './NavigationBar';
 
 function Header() {
     const [{ basket, user }, dispatch] = useStateValue();
-    const auth = getAuth();
 
     var arr = user?.email.split("@") || "guest@gmail.com".split("@");
-
     const handleAuthenticaton = () => {
         if (user) {
             signOut(auth)
@@ -29,7 +28,7 @@ function Header() {
         <>
             <div className="header">
                 <Link to="/">
-                    <img className="header-logo" src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="logo" />
+                    <img className="header-logo" src={"https://pngimg.com/uploads/amazon/amazon_PNG11.png"} alt="logo" /> <span className="header-logo-text" >.in</span>
                 </Link>
                 <div className="header-search">
                     <input className="header-search-input" type="text" />

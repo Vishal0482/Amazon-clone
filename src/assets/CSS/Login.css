@@ -1,4 +1,4 @@
-.login{
+.login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,13 +6,13 @@
     height: 100vh;
 }
 
-.login-logo{
+.login-logo {
     margin: 20px auto;
     object-fit: contain;
     width: 100px;
 }
 
-.login-container{
+.login-container {
     width: 300px;
     height: fit-content;
     display: flex;
@@ -22,36 +22,36 @@
     padding: 20px;
 }
 
-.login-container > h1{
+.login-container>h1 {
     font-weight: 500;
     margin-bottom: 20px;
 }
 
-.login-container > h5 {
+.login-container>h5 {
     margin-bottom: 5px;
 }
 
-.login-container > form > input{
+.login-container>form>input {
     height: 30px;
     margin-bottom: 10px;
     background-color: white;
-    width: 98% ;
+    width: 98%;
 }
 
-.login-container > form > input:focus{
+.login-container>form>input:focus {
     border-color: #e77600;
     box-shadow: 0 0 3px 2px #FF9900;
     outline: none;
     border: none;
 }
 
-.login-container > p{
-     margin-top: 15px;
-     font-size: 12px;
+.login-container>p {
+    margin-top: 15px;
+    font-size: 12px;
 }
 
-.login-signInButton{
-    background: #f0c14b;
+.login-signInButton {
+    background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
     border-radius: 2px;
     width: 100%;
     height: 30px;
@@ -60,12 +60,53 @@
     border-color: #a88734 #9c7e31 #846a29;
     color: #111;
 }
- 
-.login-registerButton{
+
+.login-registerButton {
+    background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+    border: 1px solid;
+    border-color: #adb1b8 #a2a6ac #8d9096;
     border-radius: 2px;
     width: 100%;
     height: 30px;
-    border: 1px solid;
     margin-top: 10px;
-    border-color: darkgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-logo-icon{
+    padding: 1px 0;
+    /* background-image: linear-gradient(-120deg, #4285f4, #34a853, #fbbc05, #ea4335);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent; */
+    color: rgb(88, 88, 88);
+}
+
+.login-registerButton>p {
+    margin-left: 10px;
+}
+
+.register-new-label {
+    display: flex;
+    flex-direction: row;
+    color: #767676;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.register-new-label:before,
+.register-new-label:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid #767676;
+    margin: auto;
+}
+
+.register-new-container {
+    width: 300px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }

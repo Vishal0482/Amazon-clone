@@ -5,20 +5,20 @@ import { useStateValue } from './StateProvider';
 import { getBasketTotal } from './reducer';
 import { useNavigate } from "react-router-dom";
 
-function Subtotal() {
+function Subtotal( {showButton} ) {
     const [{ basket }] = useStateValue();
     const navigate = useNavigate();
     return (
-        <div className="subtotal">
+        <div className={!showButton ? "subtotal" : "subtotal-bottom"}>
             <CurrencyFormat 
                renderText={(value) =>(
                    <>
                     <p>
-                        subtotal ({basket.length} items): <strong> {value} </strong>
+                        Subtotal ({basket.length} items): <strong> {value} </strong>
                     </p>
-                    <small className="subtotal-gift">
+                    {!showButton && <small className="subtotal-gift">
                         <input type="checkbox" /> This order contain a gift
-                    </small>
+                    </small>}
                    </>
                )} 
                decimalScale={2}
@@ -28,7 +28,7 @@ function Subtotal() {
                prefix={"$"}  
                 />
 
-            <button onClick={e => navigate('/payment')} >Proceed to checkout</button>
+           {!showButton && <button onClick={e => navigate('/payment')} >Proceed to checkout</button>}
         </div>
     )
 }

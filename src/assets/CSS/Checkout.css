@@ -1,7 +1,7 @@
 .checkout{
     display: flex;
     padding: 20px;
-    background-color: white;
+    background-color: rgb(234, 237, 237);
     height: max-content;
 }
 
@@ -14,4 +14,83 @@
     margin-right: 10px;
     padding: 10px;
     border-bottom: 1px solid lightgray;
+}
+
+.checkout-empty-basket{
+    width: 70vw;
+}
+
+.checkout-info{
+    margin: 30px 0 20px 0;
+    border-radius: 3px;
+    padding-left: 20px;
+}
+
+.checkout-flex-box{
+    display: flex;
+    background-color: white;
+    padding: 30px;
+}
+
+.checkout-flex-box > img{
+    width: 31.948%;
+}
+
+.checkout-info > p{
+    margin-top: 3px;
+    color: #007185;
+}
+
+.checkout-info > div {
+    margin-top: 10px;
+}
+
+.checkout-info > div > button{
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-weight: 400;
+    box-shadow: 0 2px 5px 0 rgba(213, 217, 217, 0.5);
+    cursor: pointer;
+}
+
+.checkout-sign-in{
+    background-color: #FFD814;
+    border: 1px solid #FCD200;
+}
+
+.checkout-sign-up{
+    background-color: white;
+    border: 1px solid #D5D9D9;
+}
+
+.checkout-empty-box{
+    height: 50px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.checkout-info-text{
+    margin-top: 20px;
+    font-size: small;
+}
+
+.checkout-shopping-cart{
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.checkout-price{
+    font-weight: 200;
+    font-size: medium;
+    color: #565959 !important;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.checkout-subtotal{
+    width: 100%;
+    background-color: white;
 }

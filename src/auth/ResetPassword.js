@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { Link } from 'react-router-dom';
+import { sendPasswordResetEmail } from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from "../firebase/config";
 
 function ResetPassword() {
     const [email, setEmail] = useState("");
-    const auth = getAuth();
+    const navigate = useNavigate();
     const handleReset = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
@@ -15,6 +16,7 @@ function ResetPassword() {
                 const errorMessage = error.message;
                 // console.log("An error has occured: ", errorCode, errorMessage);
             });
+        navigate('/login');
     };
 
     return (
