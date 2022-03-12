@@ -28,6 +28,7 @@
     display: flex;
     flex: 1;
     align-items: center;
+    margin-left: 5px;
 }
 
 .header-search-input{
@@ -62,6 +63,7 @@
     display: flex;
     align-items: center;
     color: white ;
+    padding-top: 5px;
 }
 
 .header-basket-count{
@@ -89,4 +91,46 @@
     border: 1px solid white;
     margin: -1px 9px;
     cursor: pointer;
+}
+
+.header-search-mobile{
+    background-color: #131921;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0 30px 10px;
+}
+
+@media screen and (max-width : 640px) {
+    .header-logo{
+        width: 80px;
+    }  
+    .header-logo-text{
+        left: 126px;
+    }
+    .header-nav{ 
+        position: absolute;
+        right: 0;
+    }
+}
+
+@media screen and (max-width : 500px) {
+    .header{
+        height: 40px;
+    }
+    .header-search-mobile{
+        padding-top: 3px;
+    }
+    .header-logo{
+        width: 70px;
+    }  
+    .header-logo-text{
+        left: 116px;
+        top: 12px;
+        font-size: 0.9rem;
+    }
+    .header-nav{ 
+        position: absolute;
+        right: 0;
+    }
 }

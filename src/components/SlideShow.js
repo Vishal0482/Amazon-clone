@@ -37,7 +37,7 @@ function SlideShow() {
     }
 
     useEffect(() => {
-        auto();
+        // auto();
         return () => clearInterval(slideInterval);
     }, [current]);
 

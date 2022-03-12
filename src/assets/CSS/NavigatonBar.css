@@ -21,3 +21,9 @@
 .navigaion-menu{
     display: flex;
 }
+
+@media screen and (max-width: 640px) {
+    .navigation-container{
+        justify-content: center;
+    }
+}

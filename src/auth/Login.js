@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, provider } from '../firebase/config';
-import GoogleIcon from '@mui/icons-material/Google';
+import googleIcon from '../assets/SVG/Google__G__Logo.svg'
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -61,7 +61,8 @@ function Login() {
                     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                     <button type="submit" onClick={signIn} className="login-signInButton" >Sign in</button>
                     <button onClick={googleHandler} className="login-registerButton" >
-                        <GoogleIcon className="google-logo-icon" /> <p>Sign in with google</p>
+                        <img src={googleIcon} className="google-logo-icon" alt="Google logo" /> 
+                        <p>Sign in with google</p>
                     </button>
                 </form>
                 <Link to='/resetPassword'>

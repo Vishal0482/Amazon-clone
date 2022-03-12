@@ -1,4 +1,4 @@
-.back-to-top{
+.back-to-top {
     text-align: center;
     padding: 10px;
     background-color: #37475A;
@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 
-.footer-container{
+.footer-container {
     background-color: #232F3E;
     color: white;
     display: flex;
@@ -15,15 +15,22 @@
     padding: 20px 10px 50px 10px;
 }
 
-.footer-nav-heading{
+.footer-nav-heading {
     font-weight: 600;
 }
 
-.footer-item{
+.footer-item {
     list-style: none;
     padding: 1px;
 }
-.footer-item:hover{
-   text-decoration: underline;
-   cursor: pointer;
+
+.footer-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+    .footer-item {
+        padding: 3px;
+    }
 }

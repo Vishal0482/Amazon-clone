@@ -94,3 +94,27 @@
     width: 100%;
     background-color: white;
 }
+
+@media screen and (max-width: 760px) {
+    .checkout{
+        flex-direction: column-reverse;
+    }
+    .checkout-title{
+        font-size: 1.2rem;
+    }
+    .checkout-empty-basket{
+        margin: auto;
+        width: 85vw;
+    }
+    .checkout-flex-box{
+        flex-direction: column;
+        text-align: center;
+    }
+    .checkout-flex-box > img{
+        width: 80%;
+        margin: auto;
+    }
+    .checkout-sign-in{
+        margin-bottom: 10px;
+    }
+}

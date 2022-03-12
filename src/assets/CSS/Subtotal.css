@@ -49,3 +49,33 @@
     font-weight: 500;
     font-size: 20px;
 }
+
+@media screen and (max-width: 760px) {
+    .subtotal{
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+    }
+    .subtotal > button{
+        min-width: 20%;
+        max-width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .subtotal-gift{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media screen and (max-width: 500px) {
+    .subtotal-bottom{
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .subtotal > button{
+        min-width: 50%;
+    }
+}

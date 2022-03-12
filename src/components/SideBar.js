@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "../assets/CSS/NavigatonBar.css"
 import "../assets/CSS/SideBar.css"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -7,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useStateValue } from './StateProvider';
 
-function SideBar() {
+function SideBar( { width } ) {
 
     const [sidebar, setSidebar] = useState(false);
     const [userPhoto, setUserPhoto] = useState(false);
@@ -39,7 +38,7 @@ function SideBar() {
             <div className="navigation-item" onClick={showSidebar} >
                 <div className="navigaion-menu">
                     <div className="navigation-menu-icon"><MenuIcon /></div>
-                    <div className="navigation-menu-text">All</div>
+                    {!(width <=640 ) && <div className="navigation-menu-text">All</div> }
                 </div>
             </div>
 

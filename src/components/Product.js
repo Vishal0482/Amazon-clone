@@ -2,7 +2,7 @@ import React from 'react';
 import { useStateValue } from './StateProvider';
 import "../assets/CSS/Product.css";
 
-function Product({ id, title, image, price, rating}) {
+function Product({ id, title, image, price, rating, bestSeller}) {
 
     const [{ basket }, dispatch] = useStateValue();
 // console.log(basket);
@@ -23,7 +23,8 @@ function Product({ id, title, image, price, rating}) {
     return (
         <div className="product">
             <div className="product-info">
-                <p>{title}</p>
+            {bestSeller && <> <div className="product-best-seller">Best Seller</div> <div className="product-best-seller-skewd">Best Seller</div> </>}
+                <p className={bestSeller && 'margin-top'} >{title}</p>
                 <p className="product-price"> 
                     <small>$</small>
                     <strong>{price}</strong>

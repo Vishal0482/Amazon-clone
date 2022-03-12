@@ -6,12 +6,15 @@ import { useStateValue } from './components/StateProvider';
 import Login from './auth/Login';
 import ResetPassword from './auth/ResetPassword';
 import Register from './auth/Register';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/config';
 // import Payment from './components/Payment';
 import Footer from './components/Footer';
+import ProductList from './components/ProductList';
+import Product from './components/Product';
+import ProductInfo from './components/ProductInfo';
 
 // import { loadStripe } from "@stripe/stripe-js"
 // import { Elements } from "@stripe/react-stripe-js"
@@ -19,8 +22,10 @@ import Footer from './components/Footer';
 
 function App() {
   const [{ }, dispatch] = useStateValue();
+  const [width, setWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", e => setWidth(window.innerWidth));
   useEffect(() => {
-   onAuthStateChanged( auth, (authUser) => {
+    onAuthStateChanged(auth, (authUser) => {
       // console.log(authUser);
 
       if (authUser) {
@@ -46,11 +51,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="checkout" element={<> <Header /> <Checkout /> <Footer /> </>} />
+          <Route path="checkout" element={<> <Header width={width} /> <Checkout width={width} /> <Footer width={width} /> </>} />
           {/* <Route path="/payment" element={<> <Header /> <Elements stripe={promise} > 
             <Payment />  
           </Elements> </>} /> */}
-          <Route path="/" element={<> <Header /> <Home /> <Footer /> </>} />
+          <Route path="/productList/:productType" element={<> <Header width={width} /> <ProductList /> <Footer width={width} />
+          </>} />
+          <Route path="/productInfo/:productId" element={<> <Header width={width} /> <ProductInfo /> <Footer width={width} /> </>} />
+          <Route path="/" element={<> <Header width={width} /> <Home /> <Footer width={width} /> </>} />
           <Route
             path="*"
             element={
@@ -61,7 +69,7 @@ function App() {
           />
         </Routes>
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
