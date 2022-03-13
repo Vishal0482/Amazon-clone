@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStateValue } from './StateProvider';
+import { useStateValue } from '../hooks/StateProvider';
 import "../assets/CSS/Product.css";
 
 function Product({ id, title, image, price, rating, bestSeller}) {

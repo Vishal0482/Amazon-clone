@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useStateValue } from './StateProvider';
+import { useStateValue } from "../hooks/StateProvider"
 
 function SideBar( { width } ) {
 

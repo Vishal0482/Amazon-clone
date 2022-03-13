@@ -2,7 +2,7 @@ import './App.css';
 import Checkout from './components/Checkout';
 import Header from './components/Header';
 import Home from './components/Home';
-import { useStateValue } from './components/StateProvider';
+import { useStateValue } from './hooks/StateProvider';
 import Login from './auth/Login';
 import ResetPassword from './auth/ResetPassword';
 import Register from './auth/Register';
@@ -13,7 +13,6 @@ import { auth } from './firebase/config';
 // import Payment from './components/Payment';
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
-import Product from './components/Product';
 import ProductInfo from './components/ProductInfo';
 
 // import { loadStripe } from "@stripe/stripe-js"
@@ -57,7 +56,7 @@ function App() {
           </Elements> </>} /> */}
           <Route path="/productList/:productType" element={<> <Header width={width} /> <ProductList /> <Footer width={width} />
           </>} />
-          <Route path="/productInfo/:productId" element={<> <Header width={width} /> <ProductInfo /> <Footer width={width} /> </>} />
+          <Route path="/productInfo/:productId" element={<> <Header width={width} /> <ProductInfo  width={width} /> <Footer width={width} /> </>} />
           <Route path="/" element={<> <Header width={width} /> <Home /> <Footer width={width} /> </>} />
           <Route
             path="*"

@@ -2,7 +2,7 @@ import React from 'react';
 import "../assets/CSS/Checkout.css";
 import CheckoutProduct from './CheckoutProduct';
 import Subtotal from './Subtotal';
-import { useStateValue } from './StateProvider';
+import { useStateValue } from '../hooks/StateProvider';
 import { useNavigate } from 'react-router-dom';
 
 function Checkout({ width }) {

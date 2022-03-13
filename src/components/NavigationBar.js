@@ -1,6 +1,5 @@
 import React from 'react'
 import "../assets/CSS/NavigatonBar.css"
-// import MenuIcon from '@mui/icons-material/Menu';
 import SideBar from './SideBar';
 
 function NavigationBar( { width } ) {

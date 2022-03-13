@@ -1,26 +1,13 @@
 // rfce
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "../assets/CSS/Home.css";
 import SlideShow from './SlideShow';
-import { db } from '../firebase/config';
-import { collection, getDocs } from "firebase/firestore";
 import { Link, useNavigate } from 'react-router-dom';
+import DataLoad from '../hooks/DataLoad';
 
 function Home() {
-    const [data, setData] = useState([]);
+    const {data} = DataLoad("home-card");
     const navigate = useNavigate();
-    const getProducts = async () => {
-        const response = await getDocs(collection(db, "home-card"));
-        let items = [];
-        response.docs.forEach(doc => {
-            items.push({ ...doc.data(), id: doc.id });
-        })
-        setData(items);
-    };
-    
-    useEffect(() => {
-        getProducts();
-    }, []);
 
     return (
         <div className="home">

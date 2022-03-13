@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams, Link } from "react-router-dom";
 import '../assets/CSS/ProductList.css'
 import Product from './Product';
-import { db } from '../firebase/config';
-import { collection, getDocs } from "firebase/firestore";
+import DataLoad from '../hooks/DataLoad';
 
 function ProductList() {
-    const [data, setData] = useState([]);
     let params = useParams();
-    // console.log(params.productType)
-    const getProducts = async () => {
-        const response = await getDocs(collection(db, params.productType));
-        let items = [];
-        response.docs.forEach(doc => {
-            items.push({ ...doc.data(), id: doc.id });
-        })
-        setData(items);
-    };
-// console.log(data);
-    useEffect(() => {
-        getProducts();
-    }, []);
+    const {data} = DataLoad(params.productType);
 
     return (
         <div className="product-list">
@@ -29,9 +15,7 @@ function ProductList() {
                 <div className="product-list-sortby">Sort by: Featured </div>
             </div>
             <div className="product-list-heading">RESULTS </div>
-            {/* 
-            show more
-        */}
+           
             <div className="product-list-row">
                 {
                     data.map((index) =>
