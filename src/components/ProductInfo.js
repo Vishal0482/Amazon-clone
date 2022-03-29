@@ -4,28 +4,58 @@ import LockIcon from '@mui/icons-material/Lock';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import '../assets/CSS/ProductInfo.css';
+import { useStateValue } from '../hooks/StateProvider';
+import Modal from "./Modal";
 
 function ProductInfo({ width }) {
     const param = useParams();
     const [visible, setVisible] = useState(false);
-    // console.log(visible);
-    // console.log(param.productId);
+    const [visiblePopup, setVisiblePopup] = useState(false);
+    const [{ basket, productList }, dispatch] = useStateValue();
+
+    const addToBasket = () => {
+        // dispatch data into data layer
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id: product.id,
+                title: product.title,
+                image: product.image,
+                price: product.price,
+                rating: product.rating,
+            },
+        });
+        setVisiblePopup(true)
+        setTimeout(() => setVisiblePopup(false), 1000);
+    };
+
+    if(visible){
+        setTimeout(() => setVisible(false), 2000);
+    }
+
+    let product;
+    for (let i = 0; i < productList.length; i++) {
+        if (productList[i].id === param.productId) {
+            product = productList[i];
+        }
+    }
+
     function showProductInfo() {
         return (
             <>
                 <div className="product-info-heading">
-                    CeraVe Hydrating Facial Cleanser | Moisturizing Non-Foaming Face Wash with Hyaluronic Acid, Ceramides and Glycerin | 16 Fluid Ounce
+                    {product.title}
                 </div>
                 <div className="product-info-rating">
                     <span>Rating</span>
-                    {Array(5)
+                    {Array(product.rating)
                         .fill()
                         .map((_, i) => (
                             <p>⭐</p>
                         ))}
                 </div>
                 <div className="product-info-price">
-                    Price: <span>$12.91</span>
+                    Price: <span>{product.price}</span>
                     <p>$23.69 Shipping & Import Fees Deposit to India</p>
                 </div>
             </>
@@ -36,20 +66,22 @@ function ProductInfo({ width }) {
         return (
             <div className="product-info-about">
                 <h4>About this item</h4>
-                <p>[ DAILY FACE WASH ] Gentle cleansing lotion with hyaluronic acid, ceramides, and glycerin to help hydrate skin without stripping moisture. Removes face makeup, dirt, and excess oil, provides 24-hour hydration and leaves a moisturized, non-greasy feel.
-                </p>
-                <p>[ NON-FOAMING CLEANSER ] Moisturizing facial cleanser with a lotion-like consistency feels smooth as it cleanses, even on sensitive, dry skin. Paraben-free, fragrance-free, soap-free, non-comedogenic, non-drying, and non-irritating. Certified by the National Eczema Association</p>
-                <p>[ ESSENTIAL CERAMIDES ] Ceramides are found naturally in the skin and make up 50% of the lipids in the skin barrier. All CeraVe products are formulated with three essential ceramides (1, 3, 6-II) to help restore and maintain the skin’s natural barrier</p>
+                {product.about.map((data) => (
+                    <p>{data}</p>
+                ))}
             </div>
         )
     }
 
     return (
         <div className={(width <= 768) ? "product-info product-info-small-size" : "product-info"}>
+
+            {visiblePopup &&  <Modal image={product.image} title={product.title} /> }
+            
             {(width <= 768) && <div className="product-info-main-section">{showProductInfo()}</div>}
             <div className="product-info-main">
                 <div className="product-info-main-section">
-                    <img className="product-info-image" src="https://m.media-amazon.com/images/I/51DbQev1thL._SX425_.jpg" alt="" />
+                    <img className="product-info-image" src={product.image} alt="" />
                 </div>
                 <div className="product-info-main-section">
                     {!(width <= 768) && <>
@@ -60,14 +92,14 @@ function ProductInfo({ width }) {
                 <div className="product-info-main-section">
                     <div className="product-info-box">
                         <div className="product-info-price">
-                            Price: <span>$12.91</span>
+                            Price: <span>{product.price}</span>
                             <p>Delivery March 25 - April 11</p>
                         </div>
                         <div className="product-info-stock">
                             In Stock
                         </div>
                         <div className="product-info-button">
-                            <button className="button-add-to-cart">Add to cart</button>
+                            <button className="button-add-to-cart" onClick={addToBasket}>Add to cart</button>
                             <button className="button-buy-now">Buy Now</button>
                         </div>
                         <div className="product-info-secure">

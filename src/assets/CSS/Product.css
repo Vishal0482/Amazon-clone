@@ -38,11 +38,17 @@
     margin-top: 10px;
 }
 
+.product-title{
+    height: 60px;
+    overflow: hidden;
+    padding-top: 18px;
+}
+
 .product-rating{
     display: flex;
 }
 
-.product > img{
+.product-img{
     max-height: 200px;
     width: 100%;
     object-fit: contain;
@@ -72,7 +78,11 @@
     .product{
         font-size: small;
     }
-    .product > img{
+    .product-title{
+        height: 50px;
+        padding-top: 0;
+    }
+    .product-img{
         max-height: 150px;
     }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../assets/CSS/Header.css";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
@@ -8,9 +8,11 @@ import { signOut } from "firebase/auth";
 import { auth } from '../firebase/config';
 import NavigationBar from './NavigationBar';
 import SideBar from './SideBar';
+import Modal from './Modal';
 
 function Header( { width } ) {
     const [{ basket, user }, dispatch] = useStateValue();
+    const [msg, setMsg] = useState('');
 
     var arr = user?.email.split("@") || "guest@gmail.com".split("@");
     const handleAuthenticaton = () => {
@@ -18,6 +20,7 @@ function Header( { width } ) {
             signOut(auth)
                 .then(() => {
                     console.log("user signed out");
+                    setMsg("User Logout");
                 })
                 .catch((error) => {
                     console.log("error", error);
@@ -28,6 +31,7 @@ function Header( { width } ) {
     return (
         <>
             <div className="header">
+            {msg!="" && <Modal msg={msg} />}
             {(width <=640 ) && <SideBar width={width} /> }
                 <Link to="/">
                     <img className="header-logo" src={"https://pngimg.com/uploads/amazon/amazon_PNG11.png"} alt="logo" /> <span className="header-logo-text" >.in</span>

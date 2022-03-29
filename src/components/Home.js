@@ -7,6 +7,7 @@ import DataLoad from '../hooks/DataLoad';
 
 function Home() {
     const {data} = DataLoad("home-card");
+    // console.log(data);
     const navigate = useNavigate();
 
     return (
@@ -27,7 +28,7 @@ function Home() {
                             <div className="home-card-heading">{index.heading}</div>
                             <div className="home-card-image"> <img src={index.image} alt="" /> </div>
                             <div className="home-card-shop-now">
-                                <Link to={`/productList/${index.heading}`} >
+                                <Link to={`/productList/${index.id}`} >
                                     Shop now
                                 </Link>
                             </div>
