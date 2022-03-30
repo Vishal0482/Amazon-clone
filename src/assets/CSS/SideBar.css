@@ -26,6 +26,7 @@
     padding: 20px;
     font-weight: 500;
     font-size: larger;
+    overflow: hidden;
 }
 
 .sidebar-list{
@@ -43,6 +44,7 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .sidebar-item:hover{
@@ -57,7 +59,7 @@
 
 .user-image{
     height: 40px;
-    width: auto;
+    width: 40px;
     margin-right: 10px;
     border-radius: 50%;
     border: 1px solid white;
@@ -77,5 +79,14 @@
     }
     .sidebar-list{
         font-size: 0.8rem;
+    }
+    .sidebar-user{
+        font-size: medium;
+    }
+}
+
+@media screen and (max-width : 425px) {
+    .sidebar-user{
+        font-size: small;
     }
 }

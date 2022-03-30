@@ -9,7 +9,6 @@ import { useStateValue } from "../hooks/StateProvider"
 function SideBar( { width } ) {
 
     const [sidebar, setSidebar] = useState(false);
-    const [userPhoto, setUserPhoto] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
     const [{ basket, user }, dispatch] = useStateValue();
     var arr = user?.email.split("@") || "guest@gmail.com".split("@");

@@ -214,3 +214,13 @@
         right: 0;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .product-info-policy-popup{
+        left: 0px;
+        right: 0px;
+        width: 80vw;
+        font-size: smaller;
+        padding: 5px;
+    }
+}
