@@ -6,25 +6,29 @@ import CloseIcon from '@mui/icons-material/Close';
 import '../assets/CSS/ProductInfo.css';
 import { useStateValue } from '../hooks/StateProvider';
 import Modal from "./Modal";
+import DataLoad from '../hooks/DataLoad';
+import DateBuilder from '../hooks/DateBuilder';
 
 function ProductInfo({ width }) {
     const param = useParams();
     const [visible, setVisible] = useState(false);
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [{ basket, productList }, dispatch] = useStateValue();
-
+    // const [{ basket, productList }, dispatch] = useStateValue();
+    const {data} = DataLoad("home-card",param.productType,"products");
+    const {dateString, newDateString} = DateBuilder();
+    // console.log(data);
     const addToBasket = () => {
         // dispatch data into data layer
-        dispatch({
-            type: 'ADD_TO_BASKET',
-            item: {
-                id: product.id,
-                title: product.title,
-                image: product.image,
-                price: product.price,
-                rating: product.rating,
-            },
-        });
+        // dispatch({
+        //     type: 'ADD_TO_BASKET',
+        //     item: {
+        //         id: product.id,
+        //         title: product.title,
+        //         image: product.image,
+        //         price: product.price,
+        //         rating: product.rating,
+        //     },
+        // });
         setVisiblePopup(true)
         setTimeout(() => setVisiblePopup(false), 1000);
     };
@@ -34,11 +38,12 @@ function ProductInfo({ width }) {
     }
 
     let product;
-    for (let i = 0; i < productList.length; i++) {
-        if (productList[i].id === param.productId) {
-            product = productList[i];
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].id === param.productId) {
+            product = data[i];
         }
     }
+    // console.log(product);
 
     function showProductInfo() {
         return (
@@ -55,7 +60,7 @@ function ProductInfo({ width }) {
                         ))}
                 </div>
                 <div className="product-info-price">
-                    Price: <span>{product.price}</span>
+                    Price: <span>{product.price} $</span>
                     <p>$23.69 Shipping & Import Fees Deposit to India</p>
                 </div>
             </>
@@ -75,7 +80,7 @@ function ProductInfo({ width }) {
 
     return (
         <div className={(width <= 768) ? "product-info product-info-small-size" : "product-info"}>
-
+            {product && <>
             {visiblePopup &&  <Modal image={product.image} title={product.title} /> }
             
             {(width <= 768) && <div className="product-info-main-section">{showProductInfo()}</div>}
@@ -92,8 +97,8 @@ function ProductInfo({ width }) {
                 <div className="product-info-main-section">
                     <div className="product-info-box">
                         <div className="product-info-price">
-                            Price: <span>{product.price}</span>
-                            <p>Delivery March 25 - April 11</p>
+                            Price: <span>{product.price} $</span>
+                            <p>Delivery {dateString} - {newDateString}</p>
                         </div>
                         <div className="product-info-stock">
                             In Stock
@@ -131,6 +136,7 @@ function ProductInfo({ width }) {
                     <SearchIcon /><input type="text" placeholder="Type your keyword or question" />
                 </span>
             </div>
+            </> }
         </div>
     )
 }

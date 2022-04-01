@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../hooks/StateProvider';
 import "../assets/CSS/Product.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Modal from './Modal';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -9,7 +9,7 @@ function Product({ id, title, image, price, rating, bestSeller }) {
 
     const [{ basket }, dispatch] = useStateValue();
     const [visiblePopup, setVisiblePopup] = useState(false);
-
+    const param = useParams();
     const addToBasket = () => {
         // dispatch data into data layer
         dispatch({
@@ -29,7 +29,7 @@ function Product({ id, title, image, price, rating, bestSeller }) {
     return (
         <div className="product">
             {visiblePopup && <Modal image={image} title={title} /> }
-            <Link to={`/productInfo/${id}`} >
+            <Link to={`/productInfo/${param.productType}/${id}`} >
                 <div className="product-info">
                     {bestSeller && <> <div className="product-best-seller">Best Seller</div> <div className="product-best-seller-skewd">Best Seller</div> </>}
                     <p className={bestSeller ? 'margin-top product-title' : 'product-title'} >{title}</p>

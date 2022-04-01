@@ -8,15 +8,15 @@ import { useStateValue } from '../hooks/StateProvider';
 function ProductList() {
     let params = useParams();
     const {data} = DataLoad("home-card",params.productType,"products");
-    // console.log(data);
-    const [{ basket }, dispatch] = useStateValue();
+    console.log(data.length);
+    // const [{ basket }, dispatch] = useStateValue();
 
-    useEffect(() => {
-        dispatch({
-            type: "SET_PRODUCT_LIST",
-            item: data,
-        })
-    },[data])
+    // useEffect(() => {
+    //     dispatch({
+    //         type: "SET_PRODUCT_LIST",
+    //         item: data,
+    //     })
+    // },[data])
 
     const [selected, setSelected] = useState();
     useEffect(() =>{
@@ -30,8 +30,8 @@ function ProductList() {
 
     return (
         <div className="product-list">
-            <div className="product-list-result-status">
-                <div className="product-list-result-count">1-{data.length} of over {data.length} results</div>
+           <div className="product-list-result-status">
+                <div className="product-list-result-count">{data.length===0 ? "0" : `1-${data.length} of over ${data.length}` } results</div>
                 <div className="product-list-sortby">Sort by: 
                     <select name="sort" className="product-sort" onChange={e =>setSelected(e.target.value)}>
                         <option value="default">Default</option>
@@ -42,7 +42,7 @@ function ProductList() {
             </div>
             <div className="product-list-heading">RESULTS </div>
            
-            <div className="product-list-row">
+            {data.length != 0 ? <div className="product-list-row">
                 {
                     data.map((index) =>
                         <Product
@@ -54,7 +54,7 @@ function ProductList() {
                             bestSeller={index.bestSeller} />
                     )
                 }
-            </div>
+            </div> : <div className="product-list-empty">Products not avaliable</div> }
         </div>
     );
 }

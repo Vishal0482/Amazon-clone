@@ -31,6 +31,13 @@
     color: unset;
 }
 
+.product-list-empty{
+    font-size: 1.2rem;
+    width: fit-content;
+    height: 100px;
+    margin: 50px auto;
+}
+
 @media screen and (max-width: 768px) {
     .product-list-row{
         grid-template-columns: auto auto;

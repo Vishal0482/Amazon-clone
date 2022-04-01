@@ -56,7 +56,7 @@ function App() {
           </Elements> </>} /> */}
           <Route path="/productList/:productType" element={<> <Header width={width} /> <ProductList /> <Footer width={width} />
           </>} />
-          <Route path="/productInfo/:productId" element={<> <Header width={width} /> <ProductInfo  width={width} /> <Footer width={width} /> </>} />
+          <Route path="/productInfo/:productType/:productId" element={<> <Header width={width} /> <ProductInfo  width={width} /> <Footer width={width} /> </>} />
           <Route path="/" element={<> <Header width={width} /> <Home /> <Footer width={width} /> </>} />
           <Route
             path="*"
