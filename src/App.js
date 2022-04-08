@@ -10,14 +10,15 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/config';
-// import Payment from './components/Payment';
+import Payment from './components/Payment';
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductInfo from './components/ProductInfo';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Orders from './components/Orders';
 
-// import { loadStripe } from "@stripe/stripe-js"
-// import { Elements } from "@stripe/react-stripe-js"
-// const promise = loadStripe(" public-key ");
+const promise = loadStripe("pk_test_51KjpFVSHdcmqS6nRYnDbLBQgAmZ35amkr52mzZRrQOvavxoiviKiPX4QleltovIxHmRUpAqJpDv0WP2gdDbM5Fbg00E0WmnGVY");
 
 function App() {
   const [{ }, dispatch] = useStateValue();
@@ -51,9 +52,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="checkout" element={<> <Header width={width} /> <Checkout width={width} /> <Footer width={width} /> </>} />
-          {/* <Route path="/payment" element={<> <Header /> <Elements stripe={promise} > 
-            <Payment />  
-          </Elements> </>} /> */}
+          <Route path="orders" element={<> <Header width={width} /> <Orders width={width} /> <Footer width={width} /> </>} />
+          <Route path="/payment" element={<> <Header width={width} /> <Elements stripe={promise} > <Payment width={width} /> </Elements> </>} />
           <Route path="/productList/:productType" element={<> <Header width={width} /> <ProductList /> <Footer width={width} />
           </>} />
           <Route path="/productInfo/:productType/:productId" element={<> <Header width={width} /> <ProductInfo  width={width} /> <Footer width={width} /> </>} />

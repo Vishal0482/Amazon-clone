@@ -100,9 +100,11 @@ function ProductInfo({ width }) {
                             Price: <span>{product.price} $</span>
                             <p>Delivery {dateString} - {newDateString}</p>
                         </div>
-                        <div className="product-info-stock">
+                        {product.stock!=0 ? <div className="product-info-stock">
                             In Stock
-                        </div>
+                        </div>: <div className="product-info-out-stock">
+                            Out of Stock
+                        </div>}
                         <div className="product-info-button">
                             <button className="button-add-to-cart" onClick={addToBasket}>Add to cart</button>
                             <button className="button-buy-now">Buy Now</button>

@@ -27,3 +27,6 @@ yarn-error.log*
 # rebase
 .firebase
 .firebaserc
+
+#backend
+backend/node_modules

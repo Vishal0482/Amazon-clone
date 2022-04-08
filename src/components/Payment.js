@@ -1,25 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../assets/CSS/Payment.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CheckoutProduct from './CheckoutProduct';
 import { useStateValue } from '../hooks/StateProvider';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import CurrencyFormat from 'react-currency-format';
+import { getBasketTotal } from '../hooks/reducer';
+import axios from 'axios';
+import { db } from '../firebase/config';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 
-function Payment() {
-    const [{basket, user}, dispatch] = useStateValue();
-    // const stripe = useStripe();
-    // const elements = useElemets();
+function Payment({ width }) {
+    const [{ basket, user }, dispatch] = useStateValue();
+    const navigate = useNavigate();
+    const stripe = useStripe();
+    const elements = useElements();
+    const [error, setError] = useState(null);
+    const [disabled, setDisabled] = useState(true);
+    const [processing, setProcessing] = useState("");
+    const [succeeded, setSucceeded] = useState(false);
 
-    const handleSubmit = e =>{
-        // submit
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setProcessing(true);
+        const { err, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement)
+        })
+
+        if (!err) {
+            try {
+                const { id ,created } = paymentMethod;
+               
+                const response = await axios.post("http://localhost:4000/payment", {
+                    amount: Math.round(getBasketTotal(basket) * 100),
+                    id
+                })
+
+                if (response.data.success) {
+                    console.log("Successful payment")
+                    setSucceeded(true);
+                    setError(null);
+                    setProcessing(false);
+                    
+                    await setDoc(doc (db, "user", user.uid, "orders", id), {
+                        paymentId: id,
+                        basket: basket,
+                        amount: getBasketTotal(basket),
+                        created: created
+                    }, { merge: true })
+
+                    dispatch({
+                        type: 'EMPTY_BASKET'
+                    })
+                    navigate('/orders', { replace: true });
+                }
+            }
+            catch (err) {
+                console.log("Error", err)
+            }
+        }
+        else {
+            console.log(err.message);
+        }
+    }
+    const handleChange = e => {
+        setDisabled(e.empty);
+        setError(e.error ? e.error.message : "");
     };
-    
-    const handleChange = e =>{
-        // submit
-    }; 
-
+    if (user != undefined) {
     return (
         <div className="payment">
-            <h1>Checkout (<Link to="/checkout"> {basket?.length } items</Link> )</h1>
+            <h2>Checkout (<Link to="/checkout"> {basket?.length} items</Link> )</h2>
 
             <div className="payment-container">
                 <div className="payment-section">
@@ -28,8 +80,7 @@ function Payment() {
                     </div>
                     <div className="payment-address">
                         <p> {user?.email} </p>
-                        <p>123 React soc</p>
-                        <p>Node Js road, javascript </p>
+                       
                     </div>
                 </div>
                 <div className="payment-section">
@@ -37,15 +88,16 @@ function Payment() {
                         <h3>Review items and delivery</h3>
                     </div>
                     <div className="payment-items">
-                        { basket.map(item => (
-                            <CheckoutProduct 
-                            id={item.id}
-                            title={item.title}
-                            image={item.image}
-                            price={item.price}
-                            rating={item.rating}
+                        {basket.map(item => (
+                            <CheckoutProduct
+                                width={width}
+                                id={item.id}
+                                title={item.title}
+                                image={item.image}
+                                price={item.price}
+                                rating={item.rating}
                             />
-                        )) }
+                        ))}
                     </div>
                 </div>
                 <div className="payment-section">
@@ -57,14 +109,37 @@ function Payment() {
                         {/* npm i @stripe/react-stripe-js */}
 
                         <form onSubmit={handleSubmit} >
-                            {/* <CardElement onChange={handleChange} /> */}
-                        </form>
+                            <CardElement onChange={handleChange} />
 
+                            <CurrencyFormat
+                                renderText={(value) => (
+                                    <h3>
+                                        Order Total: {value}
+                                    </h3>
+                                )}
+                                decimalScale={2}
+                                value={getBasketTotal(basket)}
+                                displayType={"text"}
+                                thousandSeprator={true}
+                                prefix={"$"}
+                            />
+
+                            <button disabled={processing || disabled || succeeded}>
+                                <span> {processing ? <p>Processing</p> : "Buy Now"} </span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    )}
+    else {
+        return (
+            <h3>Redirecting....
+                {navigate('/login')}
+            </h3>
+        )
+    }
 }
 
 export default Payment;

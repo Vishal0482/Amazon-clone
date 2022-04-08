@@ -2,7 +2,7 @@
     background-color: white;
 }
 
-.payment-container > h1{
+.payment > h2{
     text-align: center;
     padding: 10px;
     font-weight: 400;
@@ -10,12 +10,13 @@
     border-bottom: 1px solid lightgray;
 }
 
-.payment-container > h1 a{
+.payment > h2 a{
     text-decoration: none;
+    color: unset;
 }
 
 .payment-section{
-    display: flex;
+    /* display: flex; */
     padding: 20px;
     margin: 0 20px;
     border-bottom: 1px solid lightgray;

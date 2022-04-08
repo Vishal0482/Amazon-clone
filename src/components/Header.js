@@ -10,7 +10,7 @@ import NavigationBar from './NavigationBar';
 import SideBar from './SideBar';
 import Modal from './Modal';
 
-function Header( { width } ) {
+function Header({ width }) {
     const [{ basket, user }, dispatch] = useStateValue();
     const [msg, setMsg] = useState('');
 
@@ -31,12 +31,12 @@ function Header( { width } ) {
     return (
         <>
             <div className="header">
-            {msg!="" && <Modal msg={msg} />}
-            {(width <=640 ) && <SideBar width={width} /> }
+                {msg != "" && <Modal msg={msg} />}
+                {(width <= 640) && <SideBar width={width} />}
                 <Link to="/">
                     <img className="header-logo" src={"https://pngimg.com/uploads/amazon/amazon_PNG11.png"} alt="logo" /> <span className="header-logo-text" >.in</span>
                 </Link>
-                {!(width <=640 ) && <div className="header-search">
+                {!(width <= 640) && <div className="header-search">
                     <input className="header-search-input" type="text" />
                     <SearchIcon className="header-search-icon " />
                 </div>}
@@ -48,14 +48,16 @@ function Header( { width } ) {
                             <span className="header-option-line-two">{user ? 'Sign Out' : 'Sign In'}</span>
                         </div>
                     </Link>
-                    {!(width <=640 ) && <><div className="header-option">
+                    {!(width <= 640) && <><Link to={'/orders'}><div className="header-option">
                         <span className="header-option-line-one">Returns</span>
                         <span className="header-option-line-two">& Orders</span>
-                    </div>
-                    <div className="header-option">
-                        <span className="header-option-line-one">Your</span>
-                        <span className="header-option-line-two">Prime</span>
-                    </div></>}
+                    </div> </Link>
+                        <a href="https://www.amazon.in/amazonprime" target="_blank">
+                            <div className="header-option">
+                                <span className="header-option-line-one">Your</span>
+                                <span className="header-option-line-two">Prime</span>
+
+                            </div> </a></>}
                     <Link to="/checkout">
                         <div className="header-option-basket">
                             <ShoppingBasketIcon />
@@ -64,12 +66,12 @@ function Header( { width } ) {
                     </Link>
                 </div>
             </div>
-            {(width <=640 ) && <div className="header-search-mobile">
-                    <input className="header-search-input" type="text" />
-                    <SearchIcon className="header-search-icon " />
-                </div>
-                }
-             <NavigationBar width={width} />
+            {(width <= 640) && <div className="header-search-mobile">
+                <input className="header-search-input" type="text" />
+                <SearchIcon className="header-search-icon " />
+            </div>
+            }
+            <NavigationBar width={width} />
         </>
     )
 }

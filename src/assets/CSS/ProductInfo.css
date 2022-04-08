@@ -75,6 +75,11 @@
     color: green;
 }
 
+.product-info-out-stock{
+    font-size: medium;
+    color: red;
+}
+
 .product-info-button > button{
     border-radius: 10px;
     width: 100%;

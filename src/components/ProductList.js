@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import '../assets/CSS/ProductList.css'
 import Product from './Product';
 import DataLoad from '../hooks/DataLoad';
-import { useStateValue } from '../hooks/StateProvider';
+// import { useStateValue } from '../hooks/StateProvider';
 
 function ProductList() {
     let params = useParams();
     const {data} = DataLoad("home-card",params.productType,"products");
-    console.log(data.length);
+    // console.log(data.length);
     // const [{ basket }, dispatch] = useStateValue();
 
     // useEffect(() => {
