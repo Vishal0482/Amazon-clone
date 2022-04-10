@@ -10,8 +10,6 @@ import CheckoutProduct from './CheckoutProduct';
 
 function Orders({ width }) {
     const [{ basket, user }, dispatch] = useStateValue();
-    // const [orders, setOrders] = useState({});
-    // const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
     const { data } = DataLoad("user", user?.uid, "orders");
     // console.log("data ", data);

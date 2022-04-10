@@ -13,22 +13,22 @@ function ProductInfo({ width }) {
     const param = useParams();
     const [visible, setVisible] = useState(false);
     const [visiblePopup, setVisiblePopup] = useState(false);
-    // const [{ basket, productList }, dispatch] = useStateValue();
+    const [{ basket, productList }, dispatch] = useStateValue();
     const {data} = DataLoad("home-card",param.productType,"products");
     const {dateString, newDateString} = DateBuilder();
     // console.log(data);
     const addToBasket = () => {
         // dispatch data into data layer
-        // dispatch({
-        //     type: 'ADD_TO_BASKET',
-        //     item: {
-        //         id: product.id,
-        //         title: product.title,
-        //         image: product.image,
-        //         price: product.price,
-        //         rating: product.rating,
-        //     },
-        // });
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id: product.id,
+                title: product.title,
+                image: product.image,
+                price: product.price,
+                rating: product.rating,
+            },
+        });
         setVisiblePopup(true)
         setTimeout(() => setVisiblePopup(false), 1000);
     };

@@ -11,6 +11,8 @@ app.use(cors());
 
 app.post("/payment", cors(), async (req,res)=>{
   let {amount, id} = req.body;
+  console.log("amount > ",amount)
+  console.log("id > ",id)
   try{
     const payment = await stripe.paymentIntents.create({
       amount,
@@ -34,6 +36,6 @@ app.post("/payment", cors(), async (req,res)=>{
   }
 })
 
-app.listen(4000, ()=>{
+app.listen(process.env.PORT || 4000, ()=>{
   console.log("server is listening on port 4000");
 })

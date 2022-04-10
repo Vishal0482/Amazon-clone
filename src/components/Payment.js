@@ -8,7 +8,7 @@ import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from '../hooks/reducer';
 import axios from 'axios';
 import { db } from '../firebase/config';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 function Payment({ width }) {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -31,12 +31,13 @@ function Payment({ width }) {
         if (!err) {
             try {
                 const { id ,created } = paymentMethod;
-               
-                const response = await axios.post("http://localhost:4000/payment", {
+            //    console.log("id > ",id)
+                // const response = await axios.post("http://localhost:4000/payment", {
+                const response = await axios.post("https://amazon-clone-payment-server.herokuapp.com/payment", {
                     amount: Math.round(getBasketTotal(basket) * 100),
                     id
                 })
-
+                // console.log("respones > ",response);
                 if (response.data.success) {
                     console.log("Successful payment")
                     setSucceeded(true);
